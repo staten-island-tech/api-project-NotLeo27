@@ -1,5 +1,5 @@
 import "/style.css";
-import "./DOMSelectors.js";
+import { DOMSelectors } from "./DOMSelectors.js";
 
 async function getData() {
   /*fetch returns a promise */
@@ -15,13 +15,14 @@ async function getData() {
 
       const array = data.cards;
 
+      addCards(array);
       /* array.forEach((x) => {
         console.log(x.name);
       }); */
     }
   } catch (error) {
     console.log(error);
-    alert("couldn't fit the card lol");
+    alert("couldn't find the card lol");
   }
 }
 
@@ -31,7 +32,15 @@ function addCards(cards) {
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
       `<div class="card">
-      <div class=""></div>
+      <div class="name"> <p>${card.name}</p> </div>
+      <div class="cmc"> <p>${card.cmc}</p> </div>
+      <div class="rarity"> <p>${card.rarity}</p> </p> </div>
+      <div class="id"> <p>${card.multiverseid}</p> </div>
+      
+      <div class="image">
+        <img src=${card.imageUrl} alt="${card.name}"/>
+      </div>
+
       </div> `
     )
   );
