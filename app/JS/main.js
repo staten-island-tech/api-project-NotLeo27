@@ -12,18 +12,15 @@ async function getData() {
       throw new Error(response);
     } else {
       const data = await response.json();
-
-      const array = data.cards;
-
-      addCards(array);
-      /* array.forEach((x) => {
-        console.log(x.name);
-      }); */
     }
   } catch (error) {
     console.log(error);
     alert("couldn't find the card lol");
   }
+}
+
+function clearCards() {
+  DOMSelectors.personaList.innerHTML = "";
 }
 
 function addCards(cards) {
@@ -45,5 +42,7 @@ function addCards(cards) {
     )
   );
 }
+
+function cardPacks() {}
 
 getData();
