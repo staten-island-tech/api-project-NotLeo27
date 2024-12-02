@@ -12,15 +12,17 @@ async function getData() {
       throw new Error(response);
     } else {
       const data = await response.json();
+
+      const array = data.cards;
+
+      /* array.forEach((x) => {
+        console.log(x.name);
+      }); */
     }
   } catch (error) {
     console.log(error);
     alert("couldn't find the card lol");
   }
-}
-
-function clearCards() {
-  DOMSelectors.personaList.innerHTML = "";
 }
 
 function addCards(cards) {
@@ -29,27 +31,18 @@ function addCards(cards) {
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
       `<div class="card">
-
+      
       <div class="image">
         <img src=${card.imageUrl} alt="${card.name}"/>
       </div>
 
-      </div>`
+      </div> `
     )
   );
 }
 
-function handleTabClick(event) {
-  const tabId = event.target.id; //returns the id of the detected event
-  let criterion;
-
-  if (tabId === "name") {
-    criterion = "name";
-  } else if (tabId === "ID") {
-    criterion = "ID";
-  } else if (tabId === "cost") {
-    criterion = "cost";
-  }
+function clearCards() {
+  DOMSelectors.personaList.innerHTML = "";
 }
 
 getData();
