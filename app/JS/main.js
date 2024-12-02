@@ -29,20 +29,27 @@ function addCards(cards) {
     DOMSelectors.container.insertAdjacentHTML(
       "beforeend",
       `<div class="card">
-      <div class="name"> <p>${card.name}</p> </div>
-      <div class="cmc"> <p>${card.cmc}</p> </div>
-      <div class="rarity"> <p>${card.rarity}</p> </p> </div>
-      <div class="id"> <p>${card.multiverseid}</p> </div>
-      
+
       <div class="image">
         <img src=${card.imageUrl} alt="${card.name}"/>
       </div>
 
-      </div> `
+      </div>`
     )
   );
 }
 
-function cardPacks() {}
+function handleTabClick(event) {
+  const tabId = event.target.id; //returns the id of the detected event
+  let criterion;
+
+  if (tabId === "name") {
+    criterion = "name";
+  } else if (tabId === "ID") {
+    criterion = "ID";
+  } else if (tabId === "cost") {
+    criterion = "cost";
+  }
+}
 
 getData();

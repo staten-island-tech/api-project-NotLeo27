@@ -9,7 +9,29 @@
   <body>
     <h1 id="h1">Magic the Gathering Cards</h1>
 
-    <div id="container"></div>
+    <div
+      id="container"
+      class="flex justify-around items-center h-screen bg-gray-100"
+    >
+      <div
+        id="name"
+        class="w-40 h-40 bg-gray-200 flex justify-center items-center border border-gray-300 hover:scale-110 transition-transform duration-300"
+      >
+        By Name
+      </div>
+      <div
+        id="ID"
+        class="w-40 h-40 bg-gray-200 flex justify-center items-center border border-gray-300 hover:scale-110 transition-transform duration-300"
+      >
+        By ID
+      </div>
+      <div
+        id="cost"
+        class="w-40 h-40 bg-gray-200 flex justify-center items-center border border-gray-300 hover:scale-110 transition-transform duration-300"
+      >
+        By Cost
+      </div>
+    </div>
 
     <script type="module" src="JS/main.js"></script>
   </body>
