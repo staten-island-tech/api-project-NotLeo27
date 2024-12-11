@@ -75,42 +75,6 @@ function handleTabClick(event) {
     addCards(sortedCards);
 }
 
-async function handleReadMoreClick(event) {
-    
-    try {
-        const response = await fetch("https://api.magicthegathering.io/v1/cards?page=1");
-        if (response.status != 200) {
-          throw new Error(response);
-        } else {
-            const data = await response.json();
-            Cards = data.cards;
-            const cardId = event.target.id.replace('read-more-', ''); 
-            const card = Cards.find(card => card.id === cardId); 
-        
-            if (card) {
-            clearCards();     
-            showCardDetails(card); 
-        }
-        }
-        } catch (error) {
-        console.log(error);
-        alert("sorry");
-        }
-
-    /* const cardId = event.target.id.replace('read-more-', ''); 
-    const card = Cards.find(card => card.id === cardId); 
-  
-    if (card) {
-      clearCards();     
-      showCardDetails(card); 
-    } */
-}
-
-async function showCardDetails(card) {
-    DOMSelectors.container.insertAdjacentHTML("beforeend",
-    ``)
-}
-
 
 DOMSelectors.criteria.forEach((tab) =>
     tab.addEventListener("click", handleTabClick)
