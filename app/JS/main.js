@@ -32,7 +32,7 @@ function addCards(Cards) {
                 `<div class="card w-[300px] bg-white text-black rounded-lg p-6 border-2 border-black shadow-lg m-4" 
                       style="background-color: white; border: 2px solid black; padding: 1.5rem; margin: 1rem; border-radius: 0.5rem;">
                     <img src="${card.imageUrl}" alt="Image of ${card.name}" class="w-full h-auto rounded-md" />
-                    <button class="text-white bg-black w-[80%] mx-auto mt-4 py-2 transition-all duration-300 hover:bg-blue-500 hover:scale-110; border-radius:0.5rem; id="read-more-${card.id}">
+                    <button class="text-white bg-black w-[80%] mx-auto mt-4 py-2 transition-all duration-300 hover:bg-blue-500 hover:scale-110; border-radius:0.5rem; id="${card.name}">
                         Read More
                     </button>
                 </div>`
@@ -42,7 +42,7 @@ function addCards(Cards) {
 
     const readMoreButtons = document.querySelectorAll("button[id^='read-more-']");
     readMoreButtons.forEach(button => {
-    button.addEventListener("click", handleReadMoreClick);
+    button.addEventListener("click", ReadMoreClick);
   });
   
 }
@@ -69,14 +69,52 @@ function handleTabClick(event) {
         criterion = "multiverseid";
     }
 
-    const sortedCards = sortCards(Cards, criterion); // Sort the globally stored cards
+    const sortedCards = sortCards(Cards, criterion); 
 
     clearCards();
     addCards(sortedCards);
 }
 
+async function handleReadMoreClick(event) {
+    
+    try {
+        const response = await fetch("https://api.magicthegathering.io/v1/cards?page=1");
+        if (response.status != 200) {
+          throw new Error(response);
+        } else {
+            const data = await response.json();
+            Cards = data.cards;
+            const cardId = event.target.id.replace('read-more-', ''); 
+            const card = Cards.find(card => card.id === cardId); 
+        
+            if (card) {
+            clearCards();     
+            showCardDetails(card); 
+        }
+        }
+        } catch (error) {
+        console.log(error);
+        alert("sorry");
+        }
+
+    /* const cardId = event.target.id.replace('read-more-', ''); 
+    const card = Cards.find(card => card.id === cardId); 
+  
+    if (card) {
+      clearCards();     
+      showCardDetails(card); 
+    } */
+}
+
+async function showCardDetails(card) {
+    DOMSelectors.container.insertAdjacentHTML("beforeend",
+    ``)
+}
+
+
 DOMSelectors.criteria.forEach((tab) =>
     tab.addEventListener("click", handleTabClick)
 );
+
 
 getData();
