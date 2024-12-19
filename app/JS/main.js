@@ -82,7 +82,7 @@ async function ReadMoreClick(event) {
     try {
         const response = await fetch(`https://api.magicthegathering.io/v1/cards?name=${encodeURIComponent(cardName)}`);
         if (response.status !== 200) {
-            throw new Error(`Error fetching details for ${cardName}`);
+            throw new Error(response);
         }
         const data = await response.json();
         const cardDetails = data.cards[0]; 
